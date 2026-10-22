@@ -1,0 +1,22 @@
+{
+  "key.categories.aeronautics_ctrlz": "Create Aeronautics: Ctrl + Z",
+  "key.aeronautics_ctrlz.undo": "Undo Action (Ctrl+Z)",
+  "key.aeronautics_ctrlz.redo": "Redo Action (Ctrl+Y)",
+  "ctrlz.msg.undo_ok": "Undone: %s",
+  "ctrlz.msg.redo_ok": "Redone: %s",
+  "ctrlz.msg.disabled": "Undo/Redo is disabled on this server (%s)",
+  "ctrlz.msg.cooldown": "Please wait before undoing again (%s)",
+  "ctrlz.msg.empty": "History is empty (%s)",
+  "ctrlz.msg.expired": "Action has expired (%s)",
+  "ctrlz.msg.no_permission": "You do not have permission to undo this action (%s)",
+  "ctrlz.msg.dimension_blacklisted": "Undo/Redo is disabled in dimension %s",
+  "ctrlz.msg.chunks_unloaded": "Target area is not loaded: chunk %s",
+  "ctrlz.msg.checksum_mismatch": "Action data checksum mismatch (%s)",
+  "ctrlz.msg.conflict": "Conflict detected: world was modified after this action (%s)",
+  "ctrlz.msg.unsafe_cascade_redo": "Cannot safely redo cascade: target blocks changed (%s)",
+  "ctrlz.msg.atomic_rollback": "Undo failed and was atomically rolled back (%s)",
+  "ctrlz.msg.canceled": "Operation canceled (%s)",
+  "ctrlz.cmd.history_header": "Ctrl+Z History for %s (Undo: %s, Redo: %s):",
+  "ctrlz.cmd.cleared": "Cleared undo/redo history for %s",
+  "ctrlz.cmd.debug_toggled": "Ctrl+Z debug logging set to: %s"
+}

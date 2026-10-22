@@ -1,0 +1,22 @@
+{
+  "key.categories.aeronautics_ctrlz": "Create Aeronautics: Ctrl + Z",
+  "key.aeronautics_ctrlz.undo": "Отменить действие (Ctrl+Z)",
+  "key.aeronautics_ctrlz.redo": "Повторить действие (Ctrl+Y)",
+  "ctrlz.msg.undo_ok": "Отменено: %s",
+  "ctrlz.msg.redo_ok": "Повторено: %s",
+  "ctrlz.msg.disabled": "Система откатов отключена на сервере (%s)",
+  "ctrlz.msg.cooldown": "Подождите перед следующим откатом (%s)",
+  "ctrlz.msg.empty": "История пуста (%s)",
+  "ctrlz.msg.expired": "Действие устарело (%s)",
+  "ctrlz.msg.no_permission": "Нет прав на откат этого действия (%s)",
+  "ctrlz.msg.dimension_blacklisted": "Откаты запрещены в измерении %s",
+  "ctrlz.msg.chunks_unloaded": "Область не загружена: чанк %s",
+  "ctrlz.msg.checksum_mismatch": "Нарушена контрольная сумма записи (%s)",
+  "ctrlz.msg.conflict": "Конфликт изменений: конструкция была изменена (%s)",
+  "ctrlz.msg.unsafe_cascade_redo": "Повтор каскада небезопасен: блоки изменились (%s)",
+  "ctrlz.msg.atomic_rollback": "Сбой применения: выполнен атомарный возврат состояния (%s)",
+  "ctrlz.msg.canceled": "Операция отменена (%s)",
+  "ctrlz.cmd.history_header": "История Ctrl+Z игрока %s (Undo: %s, Redo: %s):",
+  "ctrlz.cmd.cleared": "История откатов игрока %s очищена",
+  "ctrlz.cmd.debug_toggled": "Отладочный режим Ctrl+Z: %s"
+}
