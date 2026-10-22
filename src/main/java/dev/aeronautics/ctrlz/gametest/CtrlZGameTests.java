@@ -40,7 +40,7 @@ public final class CtrlZGameTests {
     @GameTest(template = "empty", timeoutTicks = 100)
     public static void testContraptionBreakAndUndoReassembles(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
-        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel(GameType.SURVIVAL);
+        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel();
         HistoryManager.getOrCreateStack(mockPlayer.getUUID()).clear();
 
         BlockPos anchorWorld = helper.absolutePos(new BlockPos(2, 2, 2));
@@ -105,7 +105,7 @@ public final class CtrlZGameTests {
     @GameTest(template = "empty", timeoutTicks = 100)
     public static void testTntExplosionCascadeAtomicUndo(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
-        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel(GameType.SURVIVAL);
+        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel();
         HistoryManager.getOrCreateStack(mockPlayer.getUUID()).clear();
 
         BlockPos tntPos = helper.absolutePos(new BlockPos(2, 2, 2));
@@ -148,7 +148,7 @@ public final class CtrlZGameTests {
     @GameTest(template = "empty", timeoutTicks = 100)
     public static void testPistonPushCascadeUndo(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
-        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel(GameType.SURVIVAL);
+        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel();
         HistoryManager.getOrCreateStack(mockPlayer.getUUID()).clear();
 
         BlockPos originPos = helper.absolutePos(new BlockPos(2, 2, 2));
@@ -188,7 +188,7 @@ public final class CtrlZGameTests {
     @GameTest(template = "empty", timeoutTicks = 100)
     public static void testFluidWashCascadeUndo(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
-        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel(GameType.SURVIVAL);
+        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel();
         HistoryManager.getOrCreateStack(mockPlayer.getUUID()).clear();
 
         BlockPos sourcePos = helper.absolutePos(new BlockPos(2, 2, 2));
