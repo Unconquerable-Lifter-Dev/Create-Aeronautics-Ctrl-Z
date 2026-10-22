@@ -7,7 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.ticks.TickPriority;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,15 +23,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ServerLevelMixin {
 
     @Inject(
-            method = "scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Block;ILnet/minecraft/world/ticks/TickPriority;)V",
+            method = "scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;ILnet/minecraft/world/ticks/TickPriority;)V",
             at = @At("HEAD")
     )
     private void aeronauticsCtrlZ$onScheduleBlockTick(
-            BlockPos pos, Block block, int delay, TickPriority priority, CallbackInfo ci
+            BlockPos pos, BlockState state, int delay, TickPriority priority, CallbackInfo ci
     ) {
         if (UndoEngine.isPerformingUndoRedo()) return;
         ServerLevel self = (ServerLevel) (Object) this;
-        ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(block);
+        ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
         if (blockId != null) {
             ActionRecorder.recordScheduledTickIfActive(
                     self,
