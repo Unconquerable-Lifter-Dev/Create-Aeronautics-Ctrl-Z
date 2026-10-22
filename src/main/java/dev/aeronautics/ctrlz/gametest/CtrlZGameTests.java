@@ -16,6 +16,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -39,7 +40,7 @@ public final class CtrlZGameTests {
     @GameTest(template = "empty", timeoutTicks = 100)
     public static void testContraptionBreakAndUndoReassembles(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
-        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel();
+        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel(GameType.SURVIVAL);
         HistoryManager.getOrCreateStack(mockPlayer.getUUID()).clear();
 
         BlockPos anchorWorld = helper.absolutePos(new BlockPos(2, 2, 2));
@@ -104,7 +105,7 @@ public final class CtrlZGameTests {
     @GameTest(template = "empty", timeoutTicks = 100)
     public static void testTntExplosionCascadeAtomicUndo(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
-        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel();
+        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel(GameType.SURVIVAL);
         HistoryManager.getOrCreateStack(mockPlayer.getUUID()).clear();
 
         BlockPos tntPos = helper.absolutePos(new BlockPos(2, 2, 2));
@@ -147,7 +148,7 @@ public final class CtrlZGameTests {
     @GameTest(template = "empty", timeoutTicks = 100)
     public static void testPistonPushCascadeUndo(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
-        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel();
+        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel(GameType.SURVIVAL);
         HistoryManager.getOrCreateStack(mockPlayer.getUUID()).clear();
 
         BlockPos originPos = helper.absolutePos(new BlockPos(2, 2, 2));
@@ -187,7 +188,7 @@ public final class CtrlZGameTests {
     @GameTest(template = "empty", timeoutTicks = 100)
     public static void testFluidWashCascadeUndo(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();
-        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel();
+        ServerPlayer mockPlayer = helper.makeMockServerPlayerInLevel(GameType.SURVIVAL);
         HistoryManager.getOrCreateStack(mockPlayer.getUUID()).clear();
 
         BlockPos sourcePos = helper.absolutePos(new BlockPos(2, 2, 2));
