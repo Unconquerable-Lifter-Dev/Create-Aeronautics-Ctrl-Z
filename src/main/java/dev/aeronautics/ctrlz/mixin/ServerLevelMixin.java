@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.ticks.TickPriority;
@@ -16,11 +17,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Перехватывает планирование отложенных тиков блоков и жидкостей (scheduled ticks) на ServerLevel,
+ * Перехватывает планирование отложенных тиков блоков и жидкостей (scheduled ticks) на Level,
  * чтобы при откате можно было детерминированно восстановить запланированные тики.
  */
-@Mixin(ServerLevel.class)
-public abstract class ServerLevelMixin {
+@Mixin(Level.class)
+public abstract class LevelMixin {
 
     @Inject(
             method = "scheduleTick(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;ILnet/minecraft/world/ticks/TickPriority;)V",
@@ -30,13 +31,16 @@ public abstract class ServerLevelMixin {
             BlockPos pos, BlockState state, int delay, TickPriority priority, CallbackInfo ci
     ) {
         if (UndoEngine.isPerformingUndoRedo()) return;
-        ServerLevel self = (ServerLevel) (Object) this;
-        ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-        if (blockId != null) {
-            ActionRecorder.recordScheduledTickIfActive(
-                    self,
-                    new ScheduledTickRecord(pos.immutable(), blockId, false, delay, priority)
-            );
+        // Проверяем, что это серверный уровень
+        if (!((Level)(Object)this).isClientSide()) {
+            ServerLevel self = (ServerLevel) (Object) this;
+            ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(state.getBlock());
+            if (blockId != null) {
+                ActionRecorder.recordScheduledTickIfActive(
+                        self,
+                        new ScheduledTickRecord(pos.immutable(), blockId, false, delay, priority)
+                );
+            }
         }
     }
 
@@ -48,13 +52,15 @@ public abstract class ServerLevelMixin {
             BlockPos pos, Fluid fluid, int delay, TickPriority priority, CallbackInfo ci
     ) {
         if (UndoEngine.isPerformingUndoRedo()) return;
-        ServerLevel self = (ServerLevel) (Object) this;
-        ResourceLocation fluidId = BuiltInRegistries.FLUID.getKey(fluid);
-        if (fluidId != null) {
-            ActionRecorder.recordScheduledTickIfActive(
-                    self,
-                    new ScheduledTickRecord(pos.immutable(), fluidId, true, delay, priority)
-            );
+        if (!((Level)(Object)this).isClientSide()) {
+            ServerLevel self = (ServerLevel) (Object) this;
+            ResourceLocation fluidId = BuiltInRegistries.FLUID.getKey(fluid);
+            if (fluidId != null) {
+                ActionRecorder.recordScheduledTickIfActive(
+                        self,
+                        new ScheduledTickRecord(pos.immutable(), fluidId, true, delay, priority)
+                );
+            }
         }
     }
 }
