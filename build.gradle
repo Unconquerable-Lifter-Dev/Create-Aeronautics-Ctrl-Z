@@ -53,6 +53,12 @@ neoForge {
             sourceSet(sourceSets.test)
         }
     }
+
+    // Ключевое дополнение: включение поддержки юнит-тестов JUnit
+    unitTest {
+        enable()
+        testedMod = mods."${mod_id}"
+    }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
@@ -60,6 +66,8 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.3'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.3'
+    // Официальная документация рекомендует использовать launcher вместо engine, но engine также работает
+    // testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
